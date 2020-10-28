@@ -9,15 +9,17 @@
 const imagenPokemon = document.querySelector("#imagenContainer");
 
 // Creando la funcion para traer los pokemones
+// creamos una funcion async await.
 const traerPokemon = async () => {
   try {
-    const fetchPokemon = await fetch("https://pokeapi.co/api/v2/pokemon");
-    const pokemonDefinitivo = await fetchPokemon.json();
+    const fetchPokemon = await fetch("https://pokeapi.co/api/v2/pokemon"); //Pedimos el fetch
+    const pokemonDefinitivo = await fetchPokemon.json(); // Lo pasamos a JSON
     pokemonDefinitivo.results.map(async (value) => {
+      // Ahora usamos la propiedad de la api results para que nos traiga la url
       const pokemonUrlFetch = await fetch(value.url);
-      const pokemonUrl = await pokemonUrlFetch.json();
-      const name = pokemonUrl.name;
-      const id = pokemonUrl.id;
+      const pokemonUrl = await pokemonUrlFetch.json(); // pasamos a JSON
+      const name = pokemonUrl.name; // Por cada iteracion pedimos del map pedimos su name
+      const id = pokemonUrl.id; // Por cada iteracion del map pedimos su id para despues utilizarlo en la img
       mostrarPokemon(name, id);
     });
   } catch (error) {
