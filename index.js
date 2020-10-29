@@ -14,10 +14,12 @@ const traerPokemon = async () => {
   try {
     const fetchPokemon = await fetch("https://pokeapi.co/api/v2/pokemon"); //Pedimos el fetch
     const pokemonDefinitivo = await fetchPokemon.json(); // Lo pasamos a JSON
+    console.log(pokemonDefinitivo);
     pokemonDefinitivo.results.map(async (value) => {
       // Ahora usamos la propiedad de la api results para que nos traiga la url
       const pokemonUrlFetch = await fetch(value.url);
-      const pokemonUrl = await pokemonUrlFetch.json(); // pasamos a JSON
+      const pokemonUrl = await pokemonUrlFetch.json(); // pasamos a JSON el nuevo fetch
+      console.log(pokemonUrl);
       const name = pokemonUrl.name; // Por cada iteracion pedimos del map pedimos su name
       const id = pokemonUrl.id; // Por cada iteracion del map pedimos su id para despues utilizarlo en la img
       mostrarPokemon(name, id);
